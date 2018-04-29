@@ -1,7 +1,9 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, TextInput, AsyncStorage, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Image, TextInput, AsyncStorage, TouchableOpacity, Linking, Dimensions } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
+var deviceWidth = Dimensions.get('window').width;
+var deviceHeight = Dimensions.get('window').height;
 
 
 export default class DataScreen extends React.Component {
@@ -66,14 +68,14 @@ render() {
         <View style={styles.containerMiddle}>
         <View style={styles.containerTop}>
             <Image style=
-            {{height: 140, width: 180, marginTop: 10, marginLeft: 10}}
+            {{height: 160, width: 180, marginTop: 10, marginLeft: 10}}
             source={require('./as.jpg')}/>
             <Text style=
             {{fontFamily: 'Avenir', fontWeight: 'bold', fontSize: 14,
-            marginHorizontal: 25, marginVertical: 70         
+            marginHorizontal: 25, marginVertical: 70, color: 'white'        
              }}>Remigijus Balčiūnas</Text>        
         </View>
-            <Text style={{marginTop: 10, marginLeft: 10,
+            <Text style={{marginTop: 10, marginRight: deviceWidth/2 + 50,
                  fontFamily: 'Avenir', opacity: 0.5, fontSize: 18}} >About me</Text>
                  <TextInput
                  style={{marginLeft: 15, fontFamily: 'Avenir'}}
@@ -82,7 +84,14 @@ render() {
                 onChangeText={(value) => this.saveData(value)}
                 blurOnSubmit={true}>
                 </TextInput>
-                <Text>{this.state.data.temp}</Text>
+                <Text style={{fontFamily: 'Avenir', fontWeight: 'bold', fontSize: 18, paddingHorizontal: 60, paddingTop: 10}}>
+                I live in city where current temperature is {this.state.data.temp} °C</Text>
+                <TouchableOpacity
+                style={styles.button}
+                onPress={() => Linking.openURL('https://github.com/remigijusbalc/portfolio')}>
+                <Text>My GitHub profile</Text>
+                </TouchableOpacity>
+
         </View>
             );
         }
@@ -92,9 +101,22 @@ const styles = StyleSheet.create({
     containerTop: {
         flex: 1,
         flexDirection: 'row',
+        backgroundColor: '#34425a',
+        position: 'relative',
+        maxHeight: 180
     },
     containerMiddle: {
         flex: 1,
+        alignItems: 'center',
+        height: deviceHeight,
+        width: deviceWidth,
         position: 'absolute'
+    },
+    button: {
+        borderWidth: 1,
+        marginTop: 30,
+        padding: 10,
+        marginHorizontal: 100,
+        backgroundColor: '#a94516'
     }
 })

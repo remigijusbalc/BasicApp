@@ -6,7 +6,7 @@ import HomeScreen from "./HomeScreen";
 import DataScreen from "./DataScreen";
 
 const Portfolio = StackNavigator ({
-  Home: {screen: DataScreen},
+  Home: {screen: HomeScreen},
   Data: {screen: DataScreen}, 
         });
 
